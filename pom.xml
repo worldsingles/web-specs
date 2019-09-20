@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>worldsingles</groupId>
+  <artifactId>web-specs</artifactId>
+  <version>0.1.0</version>
+  <name>web-specs</name>
+
+  <description>Common utility functions and "extensions" to Clojure.</description>
+  <url>https://github.com/worldsingles/web-specs</url>
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Sean Corfield</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:worldsingles/web-specs.git</connection>
+    <developerConnection>scm:git:git@github.com:worldsingles/web-specs.git</developerConnection>
+    <url>https://github.com/worldsingles/web-specs</url>
+    <tag>3539ce43a25120ed148571b125edd6697b58e8b4</tag>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.10.1</version>
+    </dependency>
+    <dependency>
+      <groupId>clojure.java-time</groupId>
+      <artifactId>clojure.java-time</artifactId>
+      <version>0.3.2</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>clojars</id>
+      <url>https://repo.clojars.org/</url>
+    </repository>
+    <repository>
+      <id>sonatype</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>clojars</id>
+      <name>Clojars repository</name>
+      <url>https://clojars.org/repo</url>
+    </repository>
+  </distributionManagement>
+
+</project>
