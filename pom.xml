@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:worldsingles/web-specs.git</connection>
     <developerConnection>scm:git:git@github.com:worldsingles/web-specs.git</developerConnection>
     <url>https://github.com/worldsingles/web-specs</url>
-    <tag>3539ce43a25120ed148571b125edd6697b58e8b4</tag>
+    <tag>861bf1bebf96243b1b065980cbaa748f4d68d967</tag>
   </scm>
 
   <dependencies>
