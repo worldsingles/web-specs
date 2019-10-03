@@ -79,7 +79,7 @@
   [coerce str-or-spec & [spec]]
   (let [[to-str spec] (if spec [str-or-spec spec] [str str-or-spec])]
     `(s/with-gen (s/and (s/conformer ~coerce) ~spec)
-       (fn [] (g/fmap ~to-str (s/gen ~spec))))))
+       (fn [] (g/fmap ~to-str (s/gen (s/spec ~spec)))))))
 
 (defmacro opt-param-spec
   "Given a coercion function and a predicate / spec, produce a
@@ -94,8 +94,8 @@
                               :e (s/and string? empty? (s/conformer seq))
                               :s (s/and (s/conformer ~coerce) ~spec))
                         (s/conformer val))
-       (fn [] (g/frequency [[1 (s/gen nil?)]
-                            [5 (g/fmap ~to-str (s/gen ~spec))]])))))
+       (fn [] (g/frequency [[1 (s/gen (s/spec nil?))]
+                            [5 (g/fmap ~to-str (s/gen (s/spec ~spec)))]])))))
 
 (s/register ::boolean (param-spec ->boolean boolean?))
 
