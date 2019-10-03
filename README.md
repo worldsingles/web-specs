@@ -14,7 +14,7 @@ using `s/register` instead of `s/def` for "computed" specs.
 ``` clojure
 clj -Sdeps '{:deps {worldsingles/web-specs
                     {:git/url "https://github.com/worldsingles/web-specs"
-                     :sha "TBD"}}}'
+                     :sha "1affe2170ba8a57fc1fb3e085e9849b302ce0f2f"}}}'
 ```
 
 All the specs defined here accept strings that coerce to a given type, as well as values of that type, and will generate strings that can be coerced to that type.
