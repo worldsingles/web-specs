@@ -2,18 +2,19 @@
 
 Low-level Specs for web APIs/form fields that coerce string->type and also generate strings.
 
+## Spec 2 Branch
+
+This is an experimental branch based on `clojure.spec-alpha2` which requires
+using `s/register` instead of `s/def` for "computed" specs.
+
 ## Usage
 
 `deps.edn`:
 
 ``` clojure
-clj -Sdeps '{:deps {worldsingles/web-specs {:mvn/version "0.1.0"}}}'
-```
-
-Leiningen / Boot Dependency:
-
-``` clojure
-[worldsingles/web-specs "0.1.0"]
+clj -Sdeps '{:deps {worldsingles/web-specs
+                    {:git/url "https://github.com/worldsingles/web-specs"
+                     :sha "TBD"}}}'
 ```
 
 All the specs defined here accept strings that coerce to a given type, as well as values of that type, and will generate strings that can be coerced to that type.
@@ -42,17 +43,19 @@ All generated dates are strings of the form `MM/dd/yyyy`.
 These specs are all built on two macros that wrap low-level coercions and predicates to produce string->type coercing specs:
 * `param-spec`, `opt-param-spec`
 
+Any specs built on top of these will need to use `s/register` instead of `s/def`.
+
 These accept a "coercion function", an optional "stringify" function, and a spec:
-* Coercion: accept a value of the target type, or a string representation of such a value and either convert it to the target type or produce `:clojure.spec.alpha/invalid`
+* Coercion: accept a value of the target type, or a string representation of such a value and either convert it to the target type or produce `:clojure.spec-alpha2/invalid`
 * Stringify: accept a value of the target type and produce a string representation of it (that can be coerced back to the original value) -- this defaults to `str`
 * Spec: a spec for the target type that will successfully generate values of that type
 
-In addition, the following "coercions" are defined that accept strings or a given type, and produce `:clojure.spec.alpha/invalid` on bad input:
+In addition, the following "coercions" are defined that accept strings or a given type, and produce `:clojure.spec-alpha2/invalid` on bad input:
 * `->boolean`, `->long`, `->double`, and `->date`
 
 For `->long`, `->double`, and `->date` there are utility `coerce->...` functions that accept the given type or a string that they will attempt to coerce to the given type, throwing exceptions on bad input. These are used to build the `->...` coercions but are left public in case they are useful in other contexts.
 
-Finally, there is a convenience function that accepts a comma-separated list of numbers and will coerce that to a vector of long values, or produce `:clojure.spec.alpha/invalid` on bad input:
+Finally, there is a convenience function that accepts a comma-separated list of numbers and will coerce that to a vector of long values, or produce `:clojure.spec-alpha2/invalid` on bad input:
 * `split->longs`
 
 ## Releases

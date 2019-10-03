@@ -1,8 +1,13 @@
-{:deps {clojure.java-time {:mvn/version "0.3.2"}}
+{:deps {clojure.java-time {:mvn/version "0.3.2"}
+        org.clojure/spec-alpha2 {:git/url "https://github.com/clojure/spec-alpha2"
+                                 :sha "f4c2f6785222dd52e16741d9d0d9ae26bdbb1703"}}
  :aliases
  {:test
   {:extra-paths ["test"]
-   :extra-deps {expectations/clojure-test {:mvn/version "1.1.1"}
+   :extra-deps {expectations/clojure-test
+                {:git/url "https://github.com/clojure-expectations/clojure-test"
+                 :sha "6652cf783a5f92537edb884754c4810f979e5e94"
+                 #_#_:mvn/version "1.1.1"}
                 org.clojure/test.check {:mvn/version "0.10.0"}}}
   :runner
   {:extra-deps {com.cognitect/test-runner

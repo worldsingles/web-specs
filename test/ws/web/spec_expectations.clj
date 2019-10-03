@@ -1,7 +1,7 @@
 ;; copyright (c) 2018-2019 world singles networks llc
 
 (ns ws.web.spec-expectations
-  (:require [clojure.spec.alpha :as s]
+  (:require [clojure.spec-alpha2 :as s]
             [expectations.clojure.test :refer [approximately
                                                defexpect expect expecting
                                                 from-each in more-of]]

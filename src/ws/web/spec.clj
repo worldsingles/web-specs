@@ -2,8 +2,8 @@
 
 (ns ws.web.spec
   "Reusable specs and spec-related utilities, common to web apps."
-  (:require [clojure.spec.alpha :as s]
-            [clojure.spec.gen.alpha :as g]
+  (:require [clojure.spec-alpha2 :as s]
+            [clojure.spec-alpha2.gen :as g]
             [clojure.string :as str]
             [java-time :as jt]))
 
@@ -97,24 +97,24 @@
        (fn [] (g/frequency [[1 (s/gen nil?)]
                             [5 (g/fmap ~to-str (s/gen ~spec))]])))))
 
-(s/def ::boolean (param-spec ->boolean boolean?))
+(s/register ::boolean (param-spec ->boolean boolean?))
 
-(s/def ::long (param-spec ->long int?))
+(s/register ::long (param-spec ->long int?))
 
-(s/def ::opt-long (opt-param-spec ->long int?))
+(s/register ::opt-long (opt-param-spec ->long int?))
 
-(s/def ::pos-int (param-spec ->long pos-int?))
+(s/register ::pos-int (param-spec ->long pos-int?))
 
-(s/def ::age (param-spec ->long (s/int-in 18 121)))
+(s/register ::age (param-spec ->long (s/int-in 18 121)))
 
-(s/def ::double (param-spec ->double double?))
+(s/register ::double (param-spec ->double double?))
 
-(s/def ::opt-double (opt-param-spec ->double double?))
+(s/register ::opt-double (opt-param-spec ->double double?))
 
-(s/def ::date (param-spec ->date
-                          #(jt/format "MM/dd/yyyy" (jt/offset-date-time % 0))
-                          inst?))
+(s/register ::date (param-spec ->date
+                               #(jt/format "MM/dd/yyyy" (jt/offset-date-time % 0))
+                               inst?))
 
-(s/def ::opt-date (opt-param-spec ->date
-                                  #(jt/format "MM/dd/yyyy" (jt/offset-date-time % 0))
-                                  inst?))
+(s/register ::opt-date (opt-param-spec ->date
+                                       #(jt/format "MM/dd/yyyy" (jt/offset-date-time % 0))
+                                       inst?))
