@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>worldsingles</groupId>
   <artifactId>web-specs</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <name>web-specs</name>
 
   <description>Common utility functions and "extensions" to Clojure.</description>
@@ -25,7 +25,7 @@
     <connection>scm:git:git@github.com:worldsingles/web-specs.git</connection>
     <developerConnection>scm:git:git@github.com:worldsingles/web-specs.git</developerConnection>
     <url>https://github.com/worldsingles/web-specs</url>
-    <tag>861bf1bebf96243b1b065980cbaa748f4d68d967</tag>
+    <tag>v0.1.1</tag>
   </scm>
 
   <dependencies>

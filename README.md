@@ -1,4 +1,4 @@
-# web-specs [![Clojars Project](http://clojars.org/worldsingles/web-specs/latest-version.svg)](http://clojars.org/worldsingles/web-specs) [![cljdoc badge](https://cljdoc.org/badge/worldsingles/web-specs)](https://cljdoc.org/d/worldsingles/web-specs/CURRENT)
+# web-specs [![Clojars Project](http://clojars.org/worldsingles/web-specs/latest-version.svg)](http://clojars.org/worldsingles/web-specs) [![cljdoc badge](https://cljdoc.org/badge/worldsingles/web-specs?0.1.1)](https://cljdoc.org/d/worldsingles/web-specs/CURRENT)
 
 Low-level Specs for web APIs/form fields that coerce string->type and also generate strings.
 
@@ -7,13 +7,13 @@ Low-level Specs for web APIs/form fields that coerce string->type and also gener
 `deps.edn`:
 
 ``` clojure
-clj -Sdeps '{:deps {worldsingles/web-specs {:mvn/version "0.1.0"}}}'
+clj -Sdeps '{:deps {worldsingles/web-specs {:mvn/version "0.1.1"}}}'
 ```
 
 Leiningen / Boot Dependency:
 
 ``` clojure
-[worldsingles/web-specs "0.1.0"]
+[worldsingles/web-specs "0.1.1"]
 ```
 
 All the specs defined here accept strings that coerce to a given type, as well as values of that type, and will generate strings that can be coerced to that type.
@@ -62,6 +62,7 @@ Finally, there is a convenience function that accepts a comma-separated list of 
 
 ## Releases
 
+0.1.1 -- Jun 09, 2020 -- adds `date-time` spec and support functions (PR #2 @juan-ignacio-848)
 0.1.0 -- Sep 20, 2019 -- first public release.
 
 ## License
