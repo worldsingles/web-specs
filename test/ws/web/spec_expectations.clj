@@ -179,44 +179,80 @@
 
 (defexpect date-tests
   (expecting "String conversions"
-    (expect (jt/sql-date 1962 7 7) (->date "1962/7/7"))
-    (expect (jt/sql-date 1962 7 7) (->date "1962-7-7"))
-    (expect (jt/sql-date 1960 11 26) (->date "11/26/1960"))
-    (expect (jt/sql-date 1960 11 26) (->date "11-26-1960"))
-    ;; watch out for short year -- it will always be 2000+
-    (expect (jt/sql-date 2060 11 26) (->date "11/26/60")))
+             (expect (jt/sql-date 1962 7 7) (->date "1962/7/7"))
+             (expect (jt/sql-date 1962 7 7) (->date "1962-7-7"))
+             (expect (jt/sql-date 1960 11 26) (->date "11/26/1960"))
+             (expect (jt/sql-date 1960 11 26) (->date "11-26-1960"))
+             ;; watch out for short year -- it will always be 2000+
+             (expect (jt/sql-date 2060 11 26) (->date "11/26/60")))
   (expecting "Passthrough"
-    (expect (jt/sql-date 2019 9 20) (->date (jt/sql-date 2019 9 20)))
-    (let [now (java.util.Date.)]
-      (expect now (->date now))))
+             (expect (jt/sql-date 2019 9 20) (->date (jt/sql-date 2019 9 20)))
+             (let [now (java.util.Date.)]
+               (expect now (->date now))))
   (expecting "Invalid input"
-    (expect s/invalid? (->date "not a date"))
-    (expect s/invalid? (->date "99/99/99"))
-    (expect s/invalid? (->date :not-a-date))
-    (expect s/invalid? (s/conform :ws.web.spec/date ""))
-    (expect s/invalid? (s/conform :ws.web.spec/date nil))
-    (expect s/invalid? (s/conform :ws.web.spec/date "not a long"))
-    (expect s/invalid? (s/conform :ws.web.spec/date :not-a-long)))
+             (expect s/invalid? (->date "not a date"))
+             (expect s/invalid? (->date "99/99/99"))
+             (expect s/invalid? (->date :not-a-date))
+             (expect s/invalid? (s/conform :ws.web.spec/date ""))
+             (expect s/invalid? (s/conform :ws.web.spec/date nil))
+             (expect s/invalid? (s/conform :ws.web.spec/date "not a long"))
+             (expect s/invalid? (s/conform :ws.web.spec/date :not-a-long)))
   (expecting "Conformance"
-    (expect :ws.web.spec/date "2019/9/20")
-    (expect :ws.web.spec/date "7/7/62")
-    (expect :ws.web.spec/date "Fri Sep 20 12:34:56 PDT 2019")
-    (expect :ws.web.spec/date (java.util.Date.))
-    (expect :ws.web.spec/date #inst "2000-01-01"))
+             (expect :ws.web.spec/date "2019/9/20")
+             (expect :ws.web.spec/date "7/7/62")
+             (expect :ws.web.spec/date "Fri Sep 20 12:34:56 PDT 2019")
+             (expect :ws.web.spec/date (java.util.Date.))
+             (expect :ws.web.spec/date #inst "2000-01-01"))
   (expecting "Exercise"
-    (expect (more-of [s v]
-                     string? s
-                     inst? v
-                     #"[01][0-9]/[0123][0-9]/[0-9]{4}" s)
-            (from-each [pair (s/exercise :ws.web.spec/date)]
-                       pair)))
+             (expect (more-of [s v]
+                              string? s
+                              inst? v
+                              #"[01][0-9]/[0123][0-9]/[0-9]{4}" s)
+                     (from-each [pair (s/exercise :ws.web.spec/date)]
+                                pair)))
   (expecting "Optional dates"
-    (expect nil? (s/conform :ws.web.spec/opt-date ""))
-    (expect nil? (s/conform :ws.web.spec/opt-date nil))
-    (expect (more-of [s v]
-                     true (or (string? s) (nil? s))
-                     true (or (inst? v) (nil? v))
-                     some? (or (nil? s)
-                               (re-find #"[01][0-9]/[0123][0-9]/[0-9]{4}" s)))
-            (from-each [pair (s/exercise :ws.web.spec/opt-date)]
-                       pair))))
+             (expect nil? (s/conform :ws.web.spec/opt-date ""))
+             (expect nil? (s/conform :ws.web.spec/opt-date nil))
+             (expect (more-of [s v]
+                              true (or (string? s) (nil? s))
+                              true (or (inst? v) (nil? v))
+                              some? (or (nil? s)
+                                        (re-find #"[01][0-9]/[0123][0-9]/[0-9]{4}" s)))
+                     (from-each [pair (s/exercise :ws.web.spec/opt-date)]
+                                pair))))
+
+(defexpect date-time-tests
+  (expecting "String conversions"
+             (expect #inst "2020-04-05T22:28:12.000" (->date-time "2020-04-05T22:28:12.000Z"))
+             (expect #inst "2020-12-31T23:59:59.999" (->date-time "2020-12-31T23:59:59.999Z")))
+  (expecting "Invalid input"
+             (expect s/invalid? (->date-time "2020/04/05T22:28:12.000Z"))
+             (expect s/invalid? (->date-time "2020-4-5T22:28:12.000Z"))
+             (expect s/invalid? (->date-time "2020/04/05"))
+             (expect s/invalid? (->date-time "99/99/99T99:99:99.999Z"))
+             (expect s/invalid? (->date-time "22:40:30.231Z"))
+             (expect s/invalid? (->date-time "not a date time"))
+             (expect s/invalid? (->date-time :not-a-date-time))
+             (expect s/invalid? (s/conform :ws.web.spec/date-time ""))
+             (expect s/invalid? (s/conform :ws.web.spec/date-time nil)))
+  (expecting "Conformance"
+             (expect :ws.web.spec/date-time "2020-01-01T00:00:00.000Z")
+             (expect :ws.web.spec/date-time (java.util.Date.))
+             (expect :ws.web.spec/date-time #inst "2010-11-03T15:34:22.033Z"))
+  (expecting "Exercise"
+             (expect (more-of [s v]
+                              string? s
+                              inst? v
+                              #"[0-9]{4}-[01][0-9]-[0123][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z" s)
+                     (from-each [pair (s/exercise :ws.web.spec/date-time)]
+                                pair)))
+  (expecting "Optional date times"
+             (expect nil? (s/conform :ws.web.spec/opt-date-time ""))
+             (expect nil? (s/conform :ws.web.spec/opt-date-time nil))
+             (expect (more-of [s v]
+                              true (or (string? s) (nil? s))
+                              true (or (inst? v) (nil? v))
+                              some? (or (nil? s)
+                                        (re-find #"[0-9]{4}-[01][0-9]-[0123][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z" s)))
+                     (from-each [pair (s/exercise :ws.web.spec/opt-date-time)]
+                                pair))))
