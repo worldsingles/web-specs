@@ -74,7 +74,7 @@
     (jt/java-date s)))
 
 (defn ->date-time
-  "Spec predicate: conform to DateTime else invalid."
+  "Spec predicate: conform to Date else invalid."
   [s]
   (try (coerce->date-time s)
        (catch Exception _ ::s/invalid)))
