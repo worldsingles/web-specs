@@ -27,6 +27,8 @@ All the specs defined here accept strings that coerce to a given type, as well a
 * `:ws.web.spec/opt-double` -- a spec for "optional" `double` values (`nil` and `""` are accepted, `nil` will be generated -- but not `""`)
 * `:ws.web.spec/date` -- a spec for date values
 * `:ws.web.spec/opt-date` -- a spec for "optional" date values (`nil` and `""` are accepted, `nil` will be generated -- but not `""`)
+* `:ws.web.spec/date-time` -- a spec for date time values
+* `:ws.web.spec/opt-date-time` -- a spec for "optional" date time values (`nil` and `""` are accepted, `nil` will be generated -- but not `""`)
 
 For dates, the following formats are accepted:
 * `yyyy/M/d`
@@ -36,6 +38,9 @@ For dates, the following formats are accepted:
 * `M/d/yy` -- short years are considered 20xx
 * `M-d-yy` -- short years are considered 20xx
 * `EEE MMM dd HH:mm:ss zzz yyyy` -- e.g., `"Fri Sep 20 13:02:00 PDT 2019"`
+
+For date times, the format corresponds to ISO 8601: `yyyy-MM-ddTHH:mm:ss.SSSZ`
+-- e.g., "2020/04/05T22:28:12.000Z"
 
 All generated dates are strings of the form `MM/dd/yyyy`.
 
