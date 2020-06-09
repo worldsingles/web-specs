@@ -64,6 +64,21 @@
   (try (coerce->date s)
        (catch Exception _ ::s/invalid)))
 
+(defn coerce->date-time
+  "Given a string or date, produce a date-time, or throw an exception.
+  Low level utility used by spec predicates to accept either a
+  date or a string that can be converted to a date-time."
+  [s]
+  (if (instance? java.util.Date s)
+    s
+    (jt/java-date s)))
+
+(defn ->date-time
+  "Spec predicate: conform to Date else invalid."
+  [s]
+  (try (coerce->date-time s)
+       (catch Exception _ ::s/invalid)))
+
 (defn split->longs
   "Spec predicate: conform string to collection of Long.
   Also accepts a collection of numbers."
@@ -118,3 +133,15 @@
 (s/def ::opt-date (opt-param-spec ->date
                                   #(jt/format "MM/dd/yyyy" (jt/offset-date-time % 0))
                                   inst?))
+
+(s/def ::date-time (param-spec ->date-time
+                               #(jt/format
+                                  "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                  (jt/offset-date-time % 0))
+                               inst?))
+
+(s/def ::opt-date-time (opt-param-spec ->date-time
+                                       #(jt/format
+                                          "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                          (jt/offset-date-time % 0))
+                                       inst?))

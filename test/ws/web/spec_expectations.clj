@@ -220,3 +220,39 @@
                                (re-find #"[01][0-9]/[0123][0-9]/[0-9]{4}" s)))
             (from-each [pair (s/exercise :ws.web.spec/opt-date)]
                        pair))))
+
+(defexpect date-time-tests
+  (expecting "String conversions"
+    (expect #inst "2020-04-05T22:28:12.000" (->date-time "2020-04-05T22:28:12.000Z"))
+    (expect #inst "2020-12-31T23:59:59.999" (->date-time "2020-12-31T23:59:59.999Z")))
+  (expecting "Invalid input"
+    (expect s/invalid? (->date-time "2020/04/05T22:28:12.000Z"))
+    (expect s/invalid? (->date-time "2020-4-5T22:28:12.000Z"))
+    (expect s/invalid? (->date-time "2020/04/05"))
+    (expect s/invalid? (->date-time "99/99/99T99:99:99.999Z"))
+    (expect s/invalid? (->date-time "22:40:30.231Z"))
+    (expect s/invalid? (->date-time "not a date time"))
+    (expect s/invalid? (->date-time :not-a-date-time))
+    (expect s/invalid? (s/conform :ws.web.spec/date-time ""))
+    (expect s/invalid? (s/conform :ws.web.spec/date-time nil)))
+  (expecting "Conformance"
+    (expect :ws.web.spec/date-time "2020-01-01T00:00:00.000Z")
+    (expect :ws.web.spec/date-time (java.util.Date.))
+    (expect :ws.web.spec/date-time #inst "2010-11-03T15:34:22.033Z"))
+  (expecting "Exercise"
+    (expect (more-of [s v]
+                     string? s
+                     inst? v
+                     #"[0-9]{4}-[01][0-9]-[0123][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z" s)
+            (from-each [pair (s/exercise :ws.web.spec/date-time)]
+                       pair)))
+  (expecting "Optional date times"
+    (expect nil? (s/conform :ws.web.spec/opt-date-time ""))
+    (expect nil? (s/conform :ws.web.spec/opt-date-time nil))
+    (expect (more-of [s v]
+                     true (or (string? s) (nil? s))
+                     true (or (inst? v) (nil? v))
+                     some? (or (nil? s)
+                               (re-find #"[0-9]{4}-[01][0-9]-[0123][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z" s)))
+            (from-each [pair (s/exercise :ws.web.spec/opt-date-time)]
+                       pair))))
