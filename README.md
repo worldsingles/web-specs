@@ -40,7 +40,7 @@ For dates, the following formats are accepted:
 * `EEE MMM dd HH:mm:ss zzz yyyy` -- e.g., `"Fri Sep 20 13:02:00 PDT 2019"`
 
 For date times, the format corresponds to ISO 8601: `yyyy-MM-ddTHH:mm:ss.SSSZ`
--- e.g., `"2020/04/05T22:28:12.000Z"`
+-- e.g., `"2020-04-05T22:28:12.000Z"`
 
 All generated dates are strings of the form `MM/dd/yyyy`.
 
