@@ -62,8 +62,8 @@ Finally, there is a convenience function that accepts a comma-separated list of 
 
 ## Releases
 
-0.1.1 -- Jun 09, 2020 -- adds `date-time` spec and support functions (PR #2 @juan-ignacio-848)
-0.1.0 -- Sep 20, 2019 -- first public release.
+* 0.1.1 -- Jun 09, 2020 -- adds `date-time` spec and support functions (PR #2 @juan-ignacio-848)
+* 0.1.0 -- Sep 20, 2019 -- first public release.
 
 ## License
 
