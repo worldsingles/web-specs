@@ -1,4 +1,4 @@
-;; copyright (c) 2018-2019 world singles networks llc
+;; copyright (c) 2018-2020 world singles networks llc
 
 (ns ws.web.spec-expectations
   (:require [clojure.spec.alpha :as s]
@@ -6,7 +6,8 @@
                                                defexpect expect expecting
                                                 from-each in more-of]]
             [java-time :as jt]
-            [ws.web.spec :refer :all]))
+            [ws.web.spec
+             :refer [->boolean ->date ->date-time ->double ->long]]))
 
 (defexpect boolean-tests
   (expecting "String conversions"
