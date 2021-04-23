@@ -2,6 +2,8 @@
 
 Low-level Specs for web APIs/form fields that coerce string->type and also generate strings.
 
+_[Updated 2021-04-22: coercing specs are a less than good idea and we are moving away from these, instead adopting [coax](https://github.com/exoscale/coax) for the coercions -- which it can derive from specs -- followed by standard validation or confirmation via specs.]_
+
 ## Usage
 
 `deps.edn`:
